@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: Vision-Language-Action Educational Content API
+  description: API specification for educational content related to VLA integration with humanoid robots
+  version: 1.0.0
+  license:
+    name: MIT
+    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+
+paths:
+  /modules/vla-integration:
+    get:
+      summary: Get VLA Integration module information
+      responses:
+        '200':
+          description: Module information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleInfo'
+
+  /modules/vla-integration/chapters:
+    get:
+      summary: Get all chapters in the VLA Integration module
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+  /modules/vla-integration/chapters/{chapterId}:
+    get:
+      summary: Get specific chapter content
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [voice-to-action, cognitive-planning, capstone-vla-pipeline]
+      responses:
+        '200':
+          description: Chapter content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+
+  /modules/vla-integration/examples:
+    get:
+      summary: Get all reproducible examples
+      responses:
+        '200':
+          description: List of reproducible examples
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Example'
+
+  /modules/vla-integration/examples/{exampleId}:
+    get:
+      summary: Get specific example content
+      parameters:
+        - name: exampleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Example content with prerequisites, steps, and expected results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+
+components:
+  schemas:
+    ModuleInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "vla-integration"
+        title:
+          type: string
+          example: "Vision-Language-Action (VLA) Integration (NVIDIA Isaac™)"
+        description:
+          type: string
+          example: "Module covering VLA integration using Isaac Sim, Isaac ROS, and Nav2 for humanoid robot perception and navigation"
+        chapters:
+          type: array
+          items:
+            type: string
+        target_audience:
+          type: string
+          example: "Students applying AI perception + navigation to humanoid robots"
+        constraints:
+          type: array
+          items:
+            type: string
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+          description: "Markdown content of the chapter"
+        prerequisites:
+          type: array
+          items:
+            type: string
+        examples:
+          type: array
+          items:
+            type: string
+        diagrams:
+          type: array
+          items:
+            type: string
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+        token_count:
+          type: integer
+          description: "Number of tokens in the chapter (≤1500 for RAG compatibility)"
+
+    Example:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        prerequisites:
+          type: array
+          items:
+            type: string
+        steps:
+          type: array
+          items:
+            type: string
+        expected_result:
+          type: string
+        code:
+          type: string
+          description: "Code example in appropriate language"
+        is_reproducible:
+          type: boolean
+          default: true
+
+    Citation:
+      type: object
+      properties:
+        id:
+          type: string
+        authors:
+          type: string
+        title:
+          type: string
+        journal:
+          type: string
+        year:
+          type: string
+        volume:
+          type: string
+        number:
+          type: string
+        pages:
+          type: string
+        doi:
+          type: string

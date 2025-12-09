@@ -1,0 +1,112 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { fill: #fff3e0; stroke: #f57c00; stroke-width: 2px; rx: 10px; ry: 10px; }
+    .label { font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+    .arrow { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="label" font-size="20" font-weight="bold">Complete VLA Architecture for Humanoid Robots</text>
+
+  <!-- Voice Input -->
+  <g transform="translate(50, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Voice Input</text>
+    <text x="75" y="50" class="label">Humanoid Task</text>
+    <text x="75" y="70" class="label">Commands</text>
+  </g>
+
+  <!-- Whisper Processing -->
+  <g transform="translate(250, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">OpenAI Whisper</text>
+    <text x="75" y="50" class="label">Speech-to-Text</text>
+    <text x="75" y="70" class="label">Conversion</text>
+  </g>
+
+  <!-- LLM Planning -->
+  <g transform="translate(450, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Large Language</text>
+    <text x="75" y="50" class="label">Model (LLM)</text>
+    <text x="75" y="70" class="label">Cognitive Planning</text>
+  </g>
+
+  <!-- ROS 2 Action Graph -->
+  <g transform="translate(650, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">ROS 2 Action</text>
+    <text x="75" y="50" class="label">Graph Generation</text>
+    <text x="75" y="70" class="label">Sequencing</text>
+  </g>
+
+  <!-- Humanoid Robot -->
+  <g transform="translate(450, 220)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Humanoid Robot</text>
+    <text x="75" y="50" class="label">ROS 2 Action</text>
+    <text x="75" y="70" class="label">Execution</text>
+  </g>
+
+  <!-- Navigation (Nav2) -->
+  <g transform="translate(250, 220)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Nav2 Path</text>
+    <text x="75" y="50" class="label">Planning for</text>
+    <text x="75" y="70" class="label">Humanoids</text>
+  </g>
+
+  <!-- Isaac ROS -->
+  <g transform="translate(650, 220)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Isaac ROS</text>
+    <text x="75" y="50" class="label">VSLAM & Perception</text>
+    <text x="75" y="70" class="label">GPU Acceleration</text>
+  </g>
+
+  <!-- Isaac Sim -->
+  <g transform="translate(50, 220)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Isaac Sim</text>
+    <text x="75" y="50" class="label">Synthetic Data</text>
+    <text x="75" y="70" class="label">Generation</text>
+  </g>
+
+  <!-- Feedback Loop -->
+  <g transform="translate(450, 340)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Feedback &</text>
+    <text x="75" y="50" class="label">Adaptation</text>
+    <text x="75" y="70" class="label">System</text>
+  </g>
+
+  <!-- Arrows -->
+  <line x1="200" y1="140" x2="250" y2="140" class="arrow"/>
+  <line x1="400" y1="140" x2="450" y2="140" class="arrow"/>
+  <line x1="600" y1="140" x2="650" y2="140" class="arrow"/>
+  <line x1="725" y1="180" x2="725" y2="220" class="arrow"/>
+  <line x1="650" y1="260" x2="600" y2="380" class="arrow"/>
+  <line x1="450" y1="300" x2="450" y2="340" class="arrow"/>
+  <line x1="400" y1="380" x2="250" y2="260" class="arrow"/>
+  <line x1="250" y1="220" x2="250" y2="180" class="arrow"/>
+  <line x1="200" y1="260" x2="250" y2="260" class="arrow"/>
+  <line x1="400" y1="140" x2="400" y2="220" class="arrow"/>
+  <line x1="525" y1="300" x2="525" y2="340" class="arrow"/>
+  <line x1="525" y1="420" x2="525" y2="460" class="arrow"/>
+  <line x1="525" y1="460" x2="725" y2="460" class="arrow"/>
+  <line x1="725" y1="460" x2="725" y2="300" class="arrow"/>
+  <line x1="725" y1="460" x2="250" y2="460" class="arrow"/>
+  <line x1="250" y1="460" x2="250" y2="300" class="arrow"/>
+
+  <!-- Caption -->
+  <text x="450" y="580" class="label" font-size="12" font-style="italic">
+    Complete Vision-Language-Action pipeline architecture integrating Isaac Sim, Isaac ROS, LLM planning, and Nav2 path planning for humanoid robot perception and navigation
+  </text>
+</svg>

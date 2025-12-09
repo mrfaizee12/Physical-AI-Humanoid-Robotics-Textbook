@@ -1,0 +1,259 @@
+openapi: 3.0.0
+info:
+  title: Digital Twin Documentation API
+  description: API for accessing digital twin simulation documentation, examples, and educational content
+  version: 1.0.0
+  contact:
+    name: Digital Twin Documentation Team
+    email: docs@digital-twin.example.com
+
+servers:
+  - url: https://api.digital-twin.example.com/v1
+    description: Production server
+
+paths:
+  /modules/digital-twin:
+    get:
+      summary: Get digital twin module information
+      description: Retrieve information about the digital twin module including available chapters and resources
+      responses:
+        '200':
+          description: Module information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalTwinModule'
+        '404':
+          description: Module not found
+
+  /modules/digital-twin/chapters:
+    get:
+      summary: Get all chapters in the digital twin module
+      description: Retrieve all chapters in the digital twin module (Gazebo Physics, Unity Rendering, Sensor Simulation)
+      responses:
+        '200':
+          description: Chapters retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chapters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Module not found
+
+  /modules/digital-twin/chapters/{chapterId}:
+    get:
+      summary: Get specific chapter content
+      description: Retrieve content for a specific chapter by ID
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [gazebo-physics, unity-rendering, sensor-simulation]
+          description: ID of the chapter to retrieve
+      responses:
+        '200':
+          description: Chapter content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /modules/digital-twin/examples:
+    get:
+      summary: Get all reproducible examples
+      description: Retrieve all reproducible examples for the digital twin module
+      parameters:
+        - name: chapterId
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [gazebo-physics, unity-rendering, sensor-simulation]
+          description: Filter examples by chapter
+      responses:
+        '200':
+          description: Examples retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  examples:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Example'
+
+  /modules/digital-twin/examples/{exampleId}/run:
+    post:
+      summary: Run a reproducible example
+      description: Execute a reproducible example using Spec-Kit and Claude Code
+      parameters:
+        - name: exampleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the example to run
+      responses:
+        '200':
+          description: Example executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExampleExecutionResult'
+        '404':
+          description: Example not found
+        '500':
+          description: Example execution failed
+
+components:
+  schemas:
+    DigitalTwinModule:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "digital-twin"
+        name:
+          type: string
+          example: "Digital Twin (Gazebo & Unity)"
+        description:
+          type: string
+          example: "Physics-accurate digital twins using Gazebo and Unity for humanoid robot simulation"
+        chapters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chapter'
+        target_audience:
+          type: string
+          example: "Students building physical-AI humanoid simulations"
+        created_date:
+          type: string
+          format: date-time
+          example: "2025-12-09T00:00:00Z"
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "gazebo-physics"
+        title:
+          type: string
+          example: "Gazebo Physics Simulation"
+        description:
+          type: string
+          example: "Gravity, collision, and environment setup"
+        content:
+          type: string
+          description: "Markdown content of the chapter"
+        estimated_duration:
+          type: integer
+          description: "Estimated time to complete in minutes"
+          example: 45
+        difficulty_level:
+          type: integer
+          description: "Difficulty level from 1-5"
+          example: 3
+        prerequisites:
+          type: array
+          items:
+            type: string
+          example: ["Basic ROS 2 knowledge", "Gazebo familiarity"]
+        examples:
+          type: array
+          items:
+            $ref: '#/components/schemas/Example'
+        diagrams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Diagram'
+
+    Example:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "gazebo-basic-physics"
+        title:
+          type: string
+          example: "Basic Physics Simulation"
+        description:
+          type: string
+          example: "Simple humanoid robot physics simulation in Gazebo"
+        code_files:
+          type: array
+          items:
+            type: string
+          example: ["launch_simulation.launch.py", "physics_test.py"]
+        dependencies:
+          type: array
+          items:
+            type: string
+          example: ["ROS 2", "Gazebo", "humanoid_robot_description"]
+        steps:
+          type: array
+          items:
+            type: string
+          example: ["Launch Gazebo", "Load robot model", "Run physics simulation"]
+        expected_output:
+          type: string
+          example: "Robot falls and responds to gravity and collisions"
+        reproducible:
+          type: boolean
+          default: true
+
+    Diagram:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "gazebo-architecture"
+        title:
+          type: string
+          example: "Gazebo Architecture"
+        description:
+          type: string
+          example: "Architecture diagram showing Gazebo components"
+        file_path:
+          type: string
+          example: "/static/diagrams/gazebo-architecture.svg"
+        alt_text:
+          type: string
+          example: "Architecture showing physics engine, rendering, and plugins"
+
+    ExampleExecutionResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        execution_id:
+          type: string
+          example: "exec-12345"
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        logs:
+          type: array
+          items:
+            type: string
+        output_artifacts:
+          type: array
+          items:
+            type: string
+            example: ["simulation_results.txt", "sensor_data.csv"]
+        status:
+          type: string
+          enum: [success, failed, timeout]

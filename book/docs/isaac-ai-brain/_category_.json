@@ -1,0 +1,8 @@
+{
+  "label": "Isaac AI Brain (NVIDIA Isaac™)",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn about NVIDIA Isaac Sim for synthetic data generation, Isaac ROS for VSLAM, and Nav2 for humanoid path planning."
+  }
+}

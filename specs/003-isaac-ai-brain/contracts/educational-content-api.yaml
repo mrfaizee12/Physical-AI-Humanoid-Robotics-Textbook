@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: Isaac AI Brain Educational Content API
+  description: API specification for educational content related to Isaac Sim, Isaac ROS, and Nav2 for humanoid robots
+  version: 1.0.0
+  license:
+    name: MIT
+    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+
+paths:
+  /modules/isaac-ai-brain:
+    get:
+      summary: Get Isaac AI Brain module information
+      responses:
+        '200':
+          description: Module information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleInfo'
+
+  /modules/isaac-ai-brain/chapters:
+    get:
+      summary: Get all chapters in the Isaac AI Brain module
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+  /modules/isaac-ai-brain/chapters/{chapterId}:
+    get:
+      summary: Get specific chapter content
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [isaac-sim, isaac-ros, nav2-path-planning]
+      responses:
+        '200':
+          description: Chapter content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+
+  /modules/isaac-ai-brain/examples:
+    get:
+      summary: Get all reproducible examples
+      responses:
+        '200':
+          description: List of reproducible examples
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Example'
+
+  /modules/isaac-ai-brain/examples/{exampleId}:
+    get:
+      summary: Get specific example content
+      parameters:
+        - name: exampleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Example content with prerequisites, steps, and expected results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+
+components:
+  schemas:
+    ModuleInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "isaac-ai-brain"
+        title:
+          type: string
+          example: "Isaac AI Brain (NVIDIA Isaac™)"
+        description:
+          type: string
+          example: "Module covering Isaac Sim, Isaac ROS, and Nav2 for humanoid robot perception and navigation"
+        chapters:
+          type: array
+          items:
+            type: string
+        target_audience:
+          type: string
+          example: "Students applying AI perception + navigation to humanoid robots"
+        constraints:
+          type: array
+          items:
+            type: string
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+          description: "Markdown content of the chapter"
+        prerequisites:
+          type: array
+          items:
+            type: string
+        examples:
+          type: array
+          items:
+            type: string
+        diagrams:
+          type: array
+          items:
+            type: string
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+        token_count:
+          type: integer
+          description: "Number of tokens in the chapter (≤1500 for RAG compatibility)"
+
+    Example:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        prerequisites:
+          type: array
+          items:
+            type: string
+        steps:
+          type: array
+          items:
+            type: string
+        expected_result:
+          type: string
+        code:
+          type: string
+          description: "Code example in appropriate language"
+        is_reproducible:
+          type: boolean
+          default: true
+
+    Citation:
+      type: object
+      properties:
+        id:
+          type: string
+        authors:
+          type: string
+        title:
+          type: string
+        journal:
+          type: string
+        year:
+          type: string
+        volume:
+          type: string
+        number:
+          type: string
+        pages:
+          type: string
+        doi:
+          type: string

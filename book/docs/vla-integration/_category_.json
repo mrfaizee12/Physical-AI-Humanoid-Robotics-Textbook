@@ -1,0 +1,8 @@
+{
+  "label": "Module 4 — Vision-Language-Action (VLA) Integration",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn about connecting voice commands to robotic control using NVIDIA Isaac Sim, Isaac ROS, and Nav2 for humanoid robot perception and navigation."
+  }
+}

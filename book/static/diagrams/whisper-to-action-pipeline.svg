@@ -1,0 +1,69 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2px; rx: 10px; ry: 10px; }
+    .label { font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+    .arrow { stroke: #666; stroke-width: 2px; marker-end: url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" class="label" font-size="20" font-weight="bold">Whisper to Action Pipeline Architecture</text>
+
+  <!-- Voice Input -->
+  <g transform="translate(50, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Voice Input</text>
+    <text x="75" y="50" class="label">Humanoid Robot</text>
+    <text x="75" y="70" class="label">Voice Command</text>
+  </g>
+
+  <!-- Whisper Processing -->
+  <g transform="translate(250, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">OpenAI Whisper</text>
+    <text x="75" y="50" class="label">Speech-to-Text</text>
+    <text x="75" y="70" class="label">Conversion</text>
+  </g>
+
+  <!-- Intent Recognition -->
+  <g transform="translate(450, 100)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Intent Recognition</text>
+    <text x="75" y="50" class="label">Natural Language</text>
+    <text x="75" y="70" class="label">Processing</text>
+  </g>
+
+  <!-- Action Mapping -->
+  <g transform="translate(450, 220)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Action Mapping</text>
+    <text x="75" y="50" class="label">Robotic Action</text>
+    <text x="75" y="70" class="label">Translation</text>
+  </g>
+
+  <!-- Humanoid Robot -->
+  <g transform="translate(250, 340)">
+    <rect width="150" height="80" class="node"/>
+    <text x="75" y="30" class="label" font-weight="bold">Humanoid Robot</text>
+    <text x="75" y="50" class="label">ROS 2 Action</text>
+    <text x="75" y="70" class="label">Execution</text>
+  </g>
+
+  <!-- Arrows -->
+  <line x1="200" y1="140" x2="250" y2="140" class="arrow"/>
+  <line x1="400" y1="140" x2="450" y2="140" class="arrow"/>
+  <line x1="525" y1="180" x2="525" y2="220" class="arrow"/>
+  <line x1="450" y1="260" x2="400" y2="380" class="arrow"/>
+  <line x1="250" y1="380" x2="200" y2="140" class="arrow"/>
+
+  <!-- Caption -->
+  <text x="400" y="480" class="label" font-size="12" font-style="italic">
+    Architecture showing the voice command processing pipeline from Whisper speech-to-text to robotic action execution for humanoid robots
+  </text>
+</svg>

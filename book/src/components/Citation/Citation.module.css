@@ -1,0 +1,13 @@
+.citationContainer {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-left: 3px solid #007cba;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.citationContainer sup {
+  color: #007cba;
+  font-weight: bold;
+}
