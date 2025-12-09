@@ -1,55 +1,58 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: 0.1.0 -> 1.0.0
+- Description: Initial population of the project constitution with principles, standards, and governance for the "Book + Embedded RAG Chatbot on Physical AI & Humanoid Robotics" project.
+- Sections Added:
+  - Core Principles
+  - Standards and Requirements
+  - Governance
+- Templates requiring updates:
+  - ✅ .specify/templates/plan-template.md (No changes needed)
+  - ✅ .specify/templates/spec-template.md (No changes needed)
+  - ✅ .specify/templates/tasks-template.md (No changes needed)
+  - ✅ README.md (No changes needed)
+-->
+# Book + Embedded RAG Chatbot on Physical AI & Humanoid Robotics Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Content Accuracy
+All content must be grounded in official documentation and peer-reviewed sources from the robotics and AI fields. Uncited claims are not permitted. All sources must be cited using IEEE format.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Instructional Clarity
+The material must be presented in a clear, instructional style suitable for senior computer science and AI learners. The content should be structured into modular lessons, a capstone project, and include reproducible code examples.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Complete Reproducibility
+All projects, code, and examples must be fully reproducible using Spec-Kit Plus and the specified AI coding assistants. Code must be runnable and adhere to the constraints defined in the Spec-Kit.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Content Consistency
+The content of the book and the knowledge base of the RAG chatbot must be synchronized and consistent.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+## Standards and Requirements
 
-### [PRINCIPLE_6_NAME]
+### Source Code and Citations
+- A minimum of 40% of sources must be from peer-reviewed academic papers.
+- The remainder of sources will come from official frameworks (e.g., ROS, NVIDIA Isaac, OpenAI).
+- All claims and information must be accompanied by IEEE-style citations.
 
+### Book Requirements
+- The book will be built using Docusaurus and deployed to GitHub Pages.
+- Content will be organized into modular lessons, a capstone project, and reproducible code.
+- To ensure compatibility with the RAG system, individual pages (documents) will be chunked to a maximum of 1,500 tokens per chunk.
 
-[PRINCIPLE__DESCRIPTION]
+### Chatbot Requirements
+- The chatbot will be built with a stack including FastAPI, ChatKit/OpenAI for the front-end and API, Neon Postgres for metadata, and Qdrant for the vector store.
+- The chatbot's responses must be strictly derived from the book's content, with an explicit override mechanism for exceptional cases.
+- The chatbot must support querying against user-selected text sections.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Success Criteria & Definition of Done
+- A full, reproducible deployment of both the Docusaurus book and the RAG chatbot is mandatory.
+- A working humanoid simulation demo using ROS 2 and Gazebo/Isaac Sim must be produced.
+- The capstone project must demonstrate a full "voice -> plan -> navigate -> perceive -> manipulate" pipeline.
+- The final product must contain no undocumented claims or broken code.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Amendments to this constitution require documentation, approval, and a migration plan for any affected components. All development activities, including pull requests and reviews, must verify compliance with these principles. Complexity in implementation must be explicitly justified against these principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-09 | **Last Amended**: 2025-12-09
