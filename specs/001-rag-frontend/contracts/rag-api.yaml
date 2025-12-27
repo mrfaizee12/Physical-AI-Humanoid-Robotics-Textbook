@@ -1,0 +1,65 @@
+# RAG Agent API Contract
+
+## Query Endpoint
+
+### POST /api/rag/query
+Submit a query to the RAG agent and receive a grounded response.
+
+#### Request
+```json
+{
+  "query": "What is the principle of inverse kinematics in robotics?",
+  "userId": "optional-user-id",
+  "sessionId": "session-identifier"
+}
+```
+
+#### Response (Success - 200 OK)
+```json
+{
+  "id": "response-unique-id",
+  "queryId": "corresponding-query-id",
+  "content": "Inverse kinematics is a method used in robotics to determine the joint parameters that achieve a desired position for the end effector...",
+  "citations": [
+    {
+      "id": "citation-1",
+      "text": "The inverse kinematics problem is fundamental to robotic manipulation...",
+      "sourceUrl": "/docs/kinematics/inverse-kinematics",
+      "pageReference": "Section 4.2",
+      "context": "In robotic systems, forward kinematics computes the position of the end effector given joint angles, while inverse kinematics solves the reverse problem..."
+    }
+  ],
+  "confidence": 0.87,
+  "timestamp": "2025-12-15T10:30:00Z"
+}
+```
+
+#### Response (Error - 400 Bad Request)
+```json
+{
+  "error": "invalid_query",
+  "message": "Query must be at least 3 characters long",
+  "timestamp": "2025-12-15T10:30:00Z"
+}
+```
+
+#### Response (Service Unavailable - 503)
+```json
+{
+  "error": "service_unavailable",
+  "message": "RAG agent is temporarily unavailable",
+  "timestamp": "2025-12-15T10:30:00Z"
+}
+```
+
+## Validation Rules
+- query: Required, string between 3 and 1000 characters
+- userId: Optional, string
+- sessionId: Required, string
+
+## Error Codes
+- 400: Invalid query format
+- 408: Request timeout
+- 429: Rate limit exceeded
+- 500: Internal server error
+- 503: Service unavailable

@@ -15,7 +15,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://mrfaizee12.github.io',
+  url: 'https://physical-ai-humanoid-robotics-textb-nu.vercel.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -58,6 +58,13 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+
+  // Environment variables to be injected into client-side code
+  customFields: {
+    ragApiUrl: process.env.RAG_API_URL || process.env.REACT_APP_RAG_API_URL || 'https://faizananjum-rag-chatbot.hf.space',
+  },
+
+  // Additional theme configuration
 
   themeConfig: {
     // Replace with your project's social card

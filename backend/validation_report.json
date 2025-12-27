@@ -1,0 +1,83 @@
+{
+  "report_id": "validation_report_1766240385",
+  "timestamp": "2025-12-20T19:19:45.537817",
+  "validation_results": [
+    {
+      "test_id": "vector_structure_validation_1766240382",
+      "timestamp": "2025-12-20T19:19:42.217577",
+      "vector_count": 43,
+      "success_count": 43,
+      "error_count": 0,
+      "integrity_score": 1.0,
+      "retrieval_accuracy": null,
+      "processing_time": 4.226792335510254
+    }
+  ],
+  "sample_queries": [
+    {
+      "query_text": "What is Deploy your site | Physical AI & Humanoid Robotics Textbook Skip to main contentPhysical AI & Humano...?",
+      "expected_results": null,
+      "actual_results": [
+        {
+          "id": null,
+          "score": 0,
+          "payload": {}
+        }
+      ],
+      "precision_score": null,
+      "confidence_threshold": 0.7
+    },
+    {
+      "query_text": "What is Capstone: Autonomous Humanoid Task Execution | Physical AI & Humanoid Robotics Textbook Skip to main...?",
+      "expected_results": null,
+      "actual_results": [
+        {
+          "id": null,
+          "score": 0,
+          "payload": {}
+        }
+      ],
+      "precision_score": null,
+      "confidence_threshold": 0.7
+    },
+    {
+      "query_text": "What is Localizing objects in 3D space using point clouds Instance segmentation: Separating individual objec...?",
+      "expected_results": null,
+      "actual_results": [
+        {
+          "id": null,
+          "score": 0,
+          "payload": {}
+        }
+      ],
+      "precision_score": null,
+      "confidence_threshold": 0.7
+    }
+  ],
+  "sample_results": [
+    {
+      "chunk_validations": 43,
+      "total_chunks": 43,
+      "relationship_validation": {
+        "total_chunks": 43,
+        "valid_relationships": 43,
+        "invalid_relationships": 0,
+        "relationship_completeness_ratio": 1.0,
+        "errors": []
+      }
+    }
+  ],
+  "performance_metrics": {
+    "total_execution_time": 7.547081470489502,
+    "vectors_per_second": 132.50155095187282,
+    "avg_processing_time": 0.007547081470489502
+  },
+  "integrity_summary": {
+    "total_validated": 1000,
+    "validation_passed": 1,
+    "validation_failed": 0
+  },
+  "recommendations": [
+    "Throughput is low, investigate performance bottlenecks"
+  ]
+}

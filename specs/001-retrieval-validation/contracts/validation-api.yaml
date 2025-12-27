@@ -1,0 +1,166 @@
+# Validation API Contract
+# Defines the interface for retrieval validation functionality
+
+openapi: 3.0.0
+info:
+  title: Retrieval Validation API
+  version: 1.0.0
+  description: API for validating retrieval functionality of stored embeddings
+
+paths:
+  /validate-connection:
+    get:
+      summary: Validate connection to Qdrant
+      responses:
+        '200':
+          description: Connection successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [connected]
+                  collection_exists:
+                    type: boolean
+                  vector_count:
+                    type: integer
+        '500':
+          description: Connection failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [disconnected]
+                  error:
+                    type: string
+
+  /validate-integrity:
+    get:
+      summary: Validate integrity of stored vectors
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+          description: Number of vectors to validate
+      responses:
+        '200':
+          description: Integrity validation results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_vectors:
+                    type: integer
+                  valid_vectors:
+                    type: integer
+                  invalid_vectors:
+                    type: integer
+                  integrity_score:
+                    type: number
+                    format: float
+                    minimum: 0.0
+                    maximum: 1.0
+
+  /run-similarity-test:
+    post:
+      summary: Run similarity search validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+                - expected_url
+              properties:
+                query:
+                  type: string
+                  description: Test query for similarity search
+                expected_url:
+                  type: string
+                  description: Expected source URL for validation
+                top_k:
+                  type: integer
+                  default: 5
+      responses:
+        '200':
+          description: Similarity test results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        score:
+                          type: number
+                          format: float
+                        content:
+                          type: string
+                        url:
+                          type: string
+                  precision:
+                    type: number
+                    format: float
+                    minimum: 0.0
+                    maximum: 1.0
+
+  /generate-report:
+    get:
+      summary: Generate comprehensive validation report
+      responses:
+        '200':
+          description: Validation report
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_id:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  summary:
+                    type: object
+                    properties:
+                      total_vectors:
+                        type: integer
+                      validation_score:
+                        type: number
+                        format: float
+                      processing_time:
+                        type: number
+                        format: float
+                      sample_queries:
+                        type: array
+                        items:
+                          type: string
+                  detailed_results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        test_name:
+                          type: string
+                        result:
+                          type: string
+                          enum: [pass, fail, warning]
+                        details:
+                          type: string

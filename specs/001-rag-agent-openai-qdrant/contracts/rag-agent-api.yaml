@@ -1,0 +1,68 @@
+# API Contract: RAG Agent Interface
+
+## Overview
+This contract defines the interface for the RAG-enabled Agent that uses OpenAI Agents SDK to answer user questions by retrieving relevant chunks from the Qdrant rag_embedding collection.
+
+## Endpoints
+
+### POST /query
+Submit a text query to the RAG agent for processing.
+
+#### Request
+```json
+{
+  "query": "Your text query here",
+  "options": {
+    "top_k": 5,
+    "min_score": 0.5
+  }
+}
+```
+
+**Request Fields:**
+- `query` (string, required): The text query from the user
+- `options.top_k` (integer, optional): Number of chunks to retrieve (default: 5)
+- `options.min_score` (float, optional): Minimum similarity score for retrieved chunks (default: 0.5)
+
+#### Response
+```json
+{
+  "response": "The agent's answer based on retrieved content",
+  "sources": [
+    {
+      "content": "The text of the retrieved chunk",
+      "score": 0.85,
+      "metadata": {
+        "source": "document_source",
+        "page": 1
+      }
+    }
+  ],
+  "query_id": "unique_query_identifier",
+  "timestamp": "2025-12-13T10:30:00Z"
+}
+```
+
+**Response Fields:**
+- `response` (string): The agent's answer grounded in retrieved content
+- `sources` (array): List of retrieved chunks used to generate the response
+- `query_id` (string): Unique identifier for the query
+- `timestamp` (string): ISO 8601 timestamp of the response
+
+#### Error Responses
+- `400 Bad Request`: Invalid query format
+- `500 Internal Server Error`: Agent processing error
+
+## Agent Interface Contract
+
+### agent.invoke(query: str) -> str
+Primary method for interacting with the RAG agent.
+
+**Parameters:**
+- `query` (str): Text query from user
+
+**Returns:**
+- `str`: Grounded response based on retrieved content
+
+**Exceptions:**
+- May raise exceptions if Qdrant is unavailable or query is invalid
