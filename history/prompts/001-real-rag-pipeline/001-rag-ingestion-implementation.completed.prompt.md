@@ -32,13 +32,13 @@ prompt_text: |
 
   Environment variables:
   RAG_AGENT_URL=http://localhost:8000
-  QDRANT_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.sOlcD7V6VkIPCwcve-8LwbhXSMJcQICalopFYdVPI8A"
-  QDRANT_URL="https://0ef360cd-0593-466f-ac85-a14159d7ae38.europe-west3-0.gcp.cloud.qdrant.io:6333"
-  COHERE_API_KEY="1vdm1EOYdHJqUYbZP4iNfDQ5tuC8XmvFYBS29Xbs"
+  QDRANT_API_KEY=
+  QDRANT_URL=
+  COHERE_API_KEY=
   TARGET_WEBSITE_URL=https://physical-ai-humanoid-robotics-textb-nu.vercel.app/
   SITEMAP_URL=https://physical-ai-humanoid-robotics-textb-nu.vercel.app/sitemap.xml
   QDRANT_COLLECTION_NAME=rag_embedding
-  GEMINI_API_KEY="AIzaSyAbJBbhIKz62IuLYXOavYG21E7OjS2gXtg"
+  GEMINI_API_KEY=
 response_text: |
   Successfully implemented the complete RAG ingestion pipeline to fix the chunking logic issue. Created three main components:
 
